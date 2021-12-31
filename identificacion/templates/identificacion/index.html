@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>titulo</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="esti.css" rel="stylesheet">
+<style> 
+    
+.fondoazul{background-color: rgb(56,137,177);}
+.colorletra{color: rgb(230,230,230);}
+.sinnada{margin: 0px;padding: 0px;}
+    
+</style>
+</head>
+<body>
+<div class="container-fluid sinnada">
+<div class="container-fluid fondoazul">
+<nav class="navbar navbar-default">
+<div class="navbar-header">
+<a class="navbar-brand" href="#">WebSiteName</a>
+</div>
+
+</nav>
+</div>
+<div class="container-fluid fondoazul">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-6">
+<br /><br /><br />
+<h1 class="colorletra text-justify">El mejor sistema de preguntas y respuestas web; orientado al ambito de la informatica.</h1>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-3">
+<br /><br /><br />
+
+
+{% if var_incorecto == True %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Upss... Autenticazion fallida.
+</div>
+{%endif%}
+
+{% if var_usuario  == True %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Introduzca usuario
+</div>
+{%endif%}
+
+{% if var_pass == True %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Introduzca contrase&ntilde;a
+</div>
+{%endif%}
+
+
+
+
+<form action="{% url 'loging:logingloging' %}" method="post">{% csrf_token %}
+<div class="form-group">
+
+<input class="form-control"  placeholder="Email" name="identidad" value="{{identi}}">
+</div>
+<div class="form-group">
+
+<input class="form-control" placeholder="Contraseña" name="passs">
+</div>
+
+<div class="row">
+<div class="col-md-8">
+<button type="submit" class="btn btn-success">Entrar</button>
+</div>
+<div class="col-md-4">
+<a href="#"><button class="btn btn-danger">Registro</button></a>
+</div>
+</div>
+</form>  
+    
+</div>
+<div class="col-md-1">
+</div>
+</div>
+<br /><br />
+<hr>
+<div class="row">
+<div class="col-md-6">
+<div class="panel panel-success">
+<div class="panel-heading">Mision</div>
+<div class="panel-body">
+<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli viris intellegam, ut fugit veritus placerat per.</p>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="panel panel-success">
+<div class="panel-heading">Vision</div>
+<div class="panel-body">
+<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli viris intellegam, ut fugit veritus placerat per.Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli viris intellegam, ut fugit veritus placerat per.</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+
+<div class="container-fluid fondoazul">
+
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<div class="panel panel-success">
+<div class="panel-heading">Mision</div>
+<div class="panel-body">
+<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli viris intellegam, ut fugit veritus placerat per.</p>
+</div>
+</div>
+</div>
+<div class="col-md-1"></div>
+</div>
+</div>
+
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+</body>
+</html>

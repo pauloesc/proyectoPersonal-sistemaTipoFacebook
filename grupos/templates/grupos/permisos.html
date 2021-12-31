@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>titulo</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="esti.css" rel="stylesheet">
+
+<style>
+
+body{background-color: rgb(241,241,241)}
+
+
+.prueba{background-color: white;}
+
+.elimi-padi{padding: 0px;}
+
+hr{
+padding: 4px 0px 4px 0px;
+margin: 4px 0px 4px 0px;
+}
+
+.centrar{text-align: center;}
+
+.mardesol{display: inline-block;
+            margin-right: 20px;
+            float: left;
+    }
+
+/* espaciado no se usa en muro pero en el resto si */
+.espaciado{margin-bottom: 30px;}
+</style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="container-fluid">
+<nav class="navbar navbar-default" style="background-color: rgb(35,115,180);">
+<div class="navbar-header">
+<a class="navbar-brand" href="#" style="color:black;">WebSiteName</a>
+</div>
+</nav>
+</div>
+<div class="container-fluid">
+
+{% for info in nombresPermiso2 %}
+<div class="mardesol ">
+<div class="thumbnail">
+<img src="{{MEDIA_URL}}/media/{{info.foto}}" alt="..." width="165px" >
+<div class="caption">
+<h3>{{info.nombre}}</h3>
+
+<form action="{% url 'grup:grupo_autorizados_bajar' nomGrup.nomGrup %}" method="post">{% csrf_token %}
+<input type="hidden" name="usuario" value="{{info.nombre}}">
+<button type="submit" class="btn btn-danger">Dar de baja</button>
+</form>
+
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+
+
+<div style="clear: left;"></div>
+
+    {% for info in nombresPermiso1 %}
+<div class="mardesol">
+<div class="thumbnail">
+<img src="{{MEDIA_URL}}/media/{{info.foto}}" alt="..." width="165px" >
+<div class="caption">
+<h3>{{info.nombre}}</h3>
+
+<form action="{% url 'grup:grupo_autorizados_subir' nomGrup.nomGrup %}" method="post">{% csrf_token %}
+<input type="hidden" name="usuario" value="{{info.nombre}}">
+<button type="submit" class="btn btn-success">Dar de baja</button>
+</form>
+
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+
+
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+</body>
+</html>

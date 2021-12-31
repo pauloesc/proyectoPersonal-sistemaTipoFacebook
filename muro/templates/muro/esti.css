@@ -1,0 +1,19 @@
+body{background-color: rgb(241,241,241)}
+.navar{
+    background-color: rgb(35,115,180);
+    height: 73px;
+    margin-bottom: 30px;}
+
+.prueba{background-color: white;}
+
+.elimi-padi{padding: 0px;}
+
+hr{
+    padding: 4px 0px 4px 0px;
+    margin: 4px 0px 4px 0px;   
+}
+
+.centrar{text-align: center;}
+
+/* espaciado no se usa en muro pero en el resto si */
+.espaciado{margin-bottom: 30px;}

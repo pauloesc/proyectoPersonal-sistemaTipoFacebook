@@ -1,0 +1,248 @@
+<html>
+<head>
+<title>titulo</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="esti.css" rel="stylesheet">
+<style> 
+
+.sinnada{margin: 0px;padding: 0px;}
+.formulario{background-color: rgb(241,241,241);}
+
+</style>
+</head>
+<body>
+<div class="container-fluid sinnada">
+<div class="container-fluid formulario">
+
+<div class="container-fluid">
+<nav class="navbar navbar-default" style="background-color: rgb(35,115,180);">
+<div class="navbar-header">
+<a class="navbar-brand" href="#" style="color:black;">WebSiteName</a>
+</div>
+</nav>
+</div>
+
+
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-7">
+<h1>Registro de usuarios</h1>
+<form class="form-horizontal" action="{% url 'registro:registroregistro' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+
+<div class="form-group">
+<label for="registro1" class="col-sm-2 control-label">Username</label>
+<div class="col-sm-10">
+<input id="registro1" type="text" class="form-control" name="username" value="{{valoruser}}">
+{% if nombre_user_existe == True %}
+<p class="text-danger">Este nombre de usuario no esta disponible</p>
+{% endif %}
+
+{% if username == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="bbb" class="col-sm-2 control-label">Foto de perfil</label>
+<div class="col-sm-10">
+<input class="form-control" type="file" mutliple="true" id="bbb" name="filename">
+{% if fotofoto == True %}
+<p class="text-danger">Sube una foto; sera utilizada en tu perfil</p>
+{% endif %}
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro2" class="col-sm-2 control-label">Nombre</label>
+<div class="col-sm-10">
+<input id="registro2" type="text" class="form-control" name="nombre" value="{{valornombre}}">
+{% if nombre == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro3" class="col-sm-2 control-label">Apellido</label>
+<div class="col-sm-10">
+<input id="registro3" type="text" class="form-control" name="apellido" value="{{valorapellido}}">
+{% if apellido == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro4" class="col-sm-2 control-label">Nacionalidad</label>
+<div class="col-sm-10">
+<input id="registro4" type="text" class="form-control" name="nacionalidad">
+{% if nacionalidad == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Idioma</label>
+<div class="col-sm-10">
+
+<select name="materno" class="form-control">
+<option>Español</option>
+</select>
+
+{% if idioma == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro5" class="col-sm-2 control-label">Email</label>
+<div class="col-sm-10">
+<input id="registro5" type="text" class="form-control" name="email" value="{{valorcorreo}}">
+
+{% if email == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+{% if emailcoincidencia == True %}
+<p class="text-danger">Los campos email no coinciden</p>
+{% endif %}
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro6" class="col-sm-2 control-label">Confirmar Email</label>
+<div class="col-sm-10">
+<input id="registro6" type="text" class="form-control" name="cemail">
+
+{% if cemail == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+{% if emailcoincidencia == True %}
+<p class="text-danger">Los campos email no coinciden</p>
+{% endif %}
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro7" class="col-sm-2 control-label">Contraseña</label>
+<div class="col-sm-10">
+<input id="registro7" type="text" class="form-control" name="contra">
+
+{% if contrasena == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+{% if nocoincide == True %}
+<p class="text-danger">Las contraseñas no coinciden</p>
+{% endif %}
+
+{% if maslarga == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+{% if contrasenadescalificada == True %}
+<p class="text-danger">Contraseña fuera de rango. Ingrese una contraseña de entre 8 y 25 caracteres inclusives.</p>
+{% endif %}
+
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="registro8" class="col-sm-2 control-label">Confirmar Contraseña</label>
+<div class="col-sm-10">
+<input id="registro8" type="text" class="form-control" name="ccontra">
+
+{% if ccontrasena == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+{% if nocoincide == True %}
+<p class="text-danger">Las contraseñas no coinciden</p>
+{% endif %}
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Tecnologia</label>
+<div class="col-sm-10">
+
+<select name="tecnologia" class="form-control">
+{% for tecno in tecnologias %}
+<option>{{tecno.tecnologia}}</option>
+{% endfor %}
+</select>
+
+{% if tecno == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+<p class="text-success">Ya una vez con el usuario creado podras agregar mas tecnologias.</p>
+</div>
+
+</div>
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Nivel en dicha tecnologia.</label>
+<div class="col-sm-10">
+
+
+<select name="nivel" class="form-control">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+
+{% if nivel == True %}
+<p class="text-danger">Campo obligatorio</p>
+{% endif %}
+
+<p class="text-success">Nivel 1: Experiencia igual o menor a un año</p>
+<p class="text-success">Nivel 2: Experiencia igual o menor a dos años</p>
+<p class="text-success">Nivel 3: Experiencia igual o menor a cuatro años</p>
+<p class="text-success">Nivel 4: Experiencia mayor a cuatro años</p>
+
+
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-10">
+<button type="submit" class="btn btn-success">Registro</button>
+<hr>
+</div>
+</div>
+</form>
+</div>
+<div class="col-md-4"></div>
+</div>
+</div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+</body>
+</html>

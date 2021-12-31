@@ -1,0 +1,281 @@
+<html>
+<head>
+<title>titulo</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<style>
+.elimi-margi{margin: 0px;}
+.elimi-padi{padding: 0px;}
+body{background-color: rgb(241,241,241)}
+.prueba{background-color: white;}
+.centrar{text-align: center;}
+.espaciado{margin-bottom: 30px;}
+</style>   
+    
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="container-fluid">
+<nav class="navbar navbar-default" style="background-color: rgb(35,115,180);">
+<div class="navbar-header">
+<a class="navbar-brand" href="#" style="color:black;">WebSiteName</a>
+</div>
+</nav>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<div class="container-fluid espaciado prueba">
+{{ error }}
+<h2 class="bg-primary text-center elimi-margi">Datos personales</h2>
+<br /> 
+{% for datosuser in sqlnumero1 %}
+<fieldset disabled>
+<div class="form-group">
+<label for="disabledTextInput">Username:</label>
+<input type="text" id="disabledTextInput" class="form-control" placeholder="{{datosuser.username}}">
+</div>
+<div class="form-group">
+<label for="disabledTextInput">Nombre:</label>
+<input type="text" id="disabledTextInput" class="form-control" placeholder="{{datosuser.nombre}}">
+</div>
+<div class="form-group">
+<label for="disabledTextInput">Apellido:</label>
+<input type="text" id="disabledTextInput" class="form-control" placeholder="{{datosuser.apellido}}">
+</div>
+<div class="form-group">
+<label for="disabledTextInput">e-Mail:</label>
+<input type="text" id="disabledTextInput" class="form-control" placeholder="{{datosuser.correo}}">
+</div>
+<div class="form-group">
+<label for="disabledTextInput">Nacionalidad:</label>
+<input type="text" id="disabledTextInput" class="form-control" placeholder="algo a futuro">
+</div>
+</fieldset>
+{% endfor %}
+    
+</div>
+<div class="container-fluid espaciado prueba">
+<h2 class="bg-primary text-center elimi-margi">Cambio de contrasena</h2>
+<br /> 
+<form>
+<div class="form-group">
+<label for="exampleInputEmail1">Email address</label>
+<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+</div>
+<div class="form-group">
+<label for="exampleInputPassword1">Password</label>
+<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+</div>
+<div class="form-group">
+<label for="exampleInputPassword1">Password</label>
+<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+</div>   
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+    
+<div class="container-fluid espaciado prueba">
+<h2 class="bg-primary text-center elimi-margi">Cargar Tecnologia y nivel</h2>
+<br />
+<div class="row">
+{% for kilo in sqlnumero1 %}   
+<form action="{% url 'confi:confisubida' kilo.username %}" method="post">{% csrf_token %}
+{% endfor %}
+<div class="col-md-5">
+<select name="tecno" class="form-control">
+{% for lenguajes in sqlnumero3 %}
+<option>{{lenguajes.tecnologia}}</option>
+{% endfor %}
+</select>
+</div>
+<div class="col-md-2">
+<select name="nivel" class="form-control">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+</select>
+</div>
+<div class="col-md-5"><button type="submit" class="btn btn-success">Cargar</button></div>
+</form>
+</div>
+<br />
+</div>
+
+
+<div class="container-fluid espaciado prueba">
+<h2 class="bg-primary text-center elimi-margi">Eliminar Tecnologia</h2>
+<br /> 
+<div class="row"> 
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<table class="table table-bordered">
+<tr>
+<td class="active">Tecnologia</td>
+<td class="active">Nivel</td>
+</tr>
+{% for infor in sqlnumero2 %}   
+<tr>
+<td class="">{{infor.tecnologia}}</td>
+<td class="">{{infor.nivel}}</td>
+</tr>
+{% endfor %}  
+</table>
+
+<div class="row"> 
+{% for kilo in sqlnumero2 %}    
+<form action="{% url 'confi:confibaja' kilo.username %}" method="post">{% csrf_token %}
+{% endfor %}
+
+<div class="col-md-7">
+<select name="tecno" class="form-control">
+{% for inforr in sqlnumero2 %}   
+<option>{{inforr.tecnologia}}</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="col-md-5">
+<button type="submit" class="btn btn-danger">Eliminar</button>
+</div>
+</form>
+</div>
+<br />
+<div class="col-md-1"></div>  
+</div>
+
+</div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    <div class="container-fluid espaciado prueba">
+<h2 class="bg-primary text-center elimi-margi">Cargar Idioma</h2>
+<br />
+<div class="row">
+{% for kilo in sqlnumero1 %}   
+<form action="{% url 'confi:cargaIdioma' kilo.username %}" method="post">{% csrf_token %}
+{% endfor %}
+<div class="col-md-5">
+<select name="idiom" class="form-control">
+{% for idiomaendb in sqlnumero5 %}
+<option>{{idiomaendb.idioma}}</option>
+{% endfor %}
+</select>
+</div>
+<div class="col-md-5"><button type="submit" class="btn btn-success">Cargar</button></div>
+</form>
+</div>
+<br />
+</div>
+
+
+<div class="container-fluid espaciado prueba">
+<h2 class="bg-primary text-center elimi-margi">Eliminar Idioma</h2>
+<br /> 
+<div class="row"> 
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<table class="table table-bordered">
+<tr>
+<td class="active">Idioma</td>
+</tr>
+{% for idioma in sqlnumero4 %}
+<tr>
+<td class="">{{idioma.idioma}}</td>
+</tr>
+{% endfor %}  
+</table>
+
+<div class="row"> 
+{% for kilo in sqlnumero2 %}    
+<form action="{% url 'confi:eliminarIdioma' kilo.username %}" method="post">{% csrf_token %}
+{% endfor %}
+
+<div class="col-md-7">
+<select name="idiom" class="form-control">
+{% for idioma in sqlnumero4 %}
+<option>{{idioma.idioma}}</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="col-md-5">
+<button type="submit" class="btn btn-danger">Eliminar</button>
+</div>
+</form>
+</div>
+<br />
+<div class="col-md-1"></div>  
+</div>
+
+</div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+</div>
+</div>
+    </div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+</body>
+</html>

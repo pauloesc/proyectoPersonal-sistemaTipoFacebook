@@ -1,0 +1,218 @@
+<html>
+<head>
+<title>titulo</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="esti.css" rel="stylesheet">
+
+<style>
+
+body{background-color: rgb(241,241,241)}
+
+.prueba{background-color: white;}
+
+.elimi-padi{padding: 0px;}
+
+hr{
+padding: 4px 0px 4px 0px;
+margin: 4px 0px 4px 0px;
+}
+
+.centrar{text-align: center;}
+
+/* espaciado no se usa en muro pero en el resto si */
+.espaciado{margin-bottom: 30px;}
+</style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="container-fluid">
+<nav class="navbar navbar-default" style="background-color: rgb(35,115,180);">
+<div class="navbar-header">
+<a class="navbar-brand" href="#" style="color:black;">WebSiteName</a>
+</div>
+</nav>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8">
+
+
+    {% if pendiente_solicitud == True %}
+    <div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Esta pendiente la solicitud para unirse al grupo.
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+    {% if hacer_pregunta == True %}
+<div class="container-fluid espaciado">
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<br />
+<form action="{% url 'grup:carga_pregunta_grupo' nombre %}" method="post">{% csrf_token %}
+<div class="form-group">
+<label for="exampleInputPassword1">Pregunta</label>
+<textarea id="exampleInputPassword1" class="form-control" name="preguntaGrupo"></textarea>
+</div>
+<button type="submit" class="btn btn-success">Cargar pregunta</button>
+</form>
+</div>
+<div class="col-md-1"></div>
+</div>
+</div>
+    {% endif %}
+
+    {% if preguntas == True %}
+{% for aa in infopregunta %}
+<div class="container-fluid espaciado">
+<div class="row prueba">
+<div class="col-md-1 elimi-padi"><img class="img-responsive" src="{{MEDIA_URL}}/media/{{aa.foto}}" alt="Smiley face"></div>
+<div class="col-md-11">
+<hr>
+<p class="centrar">Username: {{aa.usuario}} &nbsp;&nbsp;&nbsp; || &nbsp;&nbsp;&nbsp; {{aa.fecha}}
+</p>
+<hr>                
+<p class="text-justify">
+
+        {% for kk in aa.contenido %}
+
+    {% if kk.que_es == 'texto' %}</p>
+    <p>{{kk.contenido}}</p>
+    {% endif %}
+
+    {% if kk.que_es == 'codigo' %}</p>
+    <pre class="prettyprint">{{kk.contenido}}</pre>
+    {% endif %}
+
+    {% endfor %}
+
+
+</p>
+<hr>
+
+<a href="{% url 'grup:vista_respuesta_grupo' nombre aa.preguntaid %}"><button type="button" class="btn btn-primary">Ir a respuestas</button></a>
+
+<hr>
+</div>
+</div>
+</div>
+{% endfor %}
+    {% endif %}
+
+
+{% if es_privado == True %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Este grupo es privado.
+</div>
+{% endif %}
+
+{% if mensaje_no_hay_preguntas == True %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+Este grupo no a echo preguntas.
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+</div>
+    
+    
+<div class="col-md-4">
+<div class="container-fluid">
+
+{% if registro_y_union == True %}
+<div class="row">
+<a href="{% url 'loging:logingloging' %}"><button type="button" class="btn btn-success btn-lg btn-block">Registrarme y unirme al grupo</button></a>
+</div>
+<br />
+{% endif %}
+
+{% if boton_unirme == True %}
+<div class="row">
+<form action="{% url 'grup:unirme_grupo' nombre %}" method="post">{% csrf_token %}
+<button type="submit" class="btn btn-success btn-lg btn-block">Unirme al grupo</button>
+</form>
+</div>
+{% endif %}
+
+
+{% if boton_eliminar == True %}
+<div class="row">
+<form action="{% url 'grup:eliminar_grupo' nombre %}" method="post">{% csrf_token %}
+<button type="submit" class="btn btn-danger btn-lg btn-block">Eliminar grupo</button>
+</form>
+</div>
+{% endif %}
+
+
+{% if boton_salirme == True %}
+<div class="row">
+<form action="{% url 'grup:salirme_grupo' nombre %}" method="post">{% csrf_token %}
+<button type="submit" class="btn btn-danger btn-lg btn-block">Salirme del grupo</button>
+</form>
+</div>
+{% endif %}
+
+
+
+
+
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-11"><p style="margin-top:15px;">NOMBRE DEL GRUPO: {{nombre}}</p></div>
+</div>
+
+<div class="row prueba">
+<hr>
+<div class="col-md-1"></div>
+<div class="col-md-11"><p>CANTIDAD DE MIEMBROS: {{n_preguntas}}</p></div>
+</div>
+
+<div class="row prueba">
+<hr>
+<div class="col-md-1"></div>
+<div class="col-md-11"><p>FECHA DE CREACION:</p></div>
+</div>
+<br />
+
+{% if gestion_permiso == True %}
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-11"><p style="margin-top:15px;"><a href="{% url 'grup:grupo_autorizados' nombre %}"><strong>PERMISOS DE USUARIO</strong></a></p></div>
+</div>
+{% endif %}
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>titulo</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style>
+
+body{background-color: rgb(241,241,241)}
+
+.prueba{background-color: white;}
+
+.elimi-padi{padding: 0px;}
+
+hr{
+padding: 4px 0px 4px 0px;
+margin: 4px 0px 4px 0px;   
+}
+
+.centrar{text-align: center;}
+
+/* espaciado no se usa en muro pero en el resto si */
+.espaciado{margin-bottom: 30px;}
+</style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="container-fluid">
+<nav class="navbar navbar-default" style="background-color: rgb(35,115,180);">
+<div class="navbar-header">
+<a class="navbar-brand" href="#" style="color:black;">WebSiteName</a>
+</div>
+</nav>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8">
+{% if var == True %}
+<div class="container-fluid espaciado">
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<br />
+
+<form action="{% url 'perfil:accionaccion' idusuario.idusuario %}" method="post">{% csrf_token %}
+
+
+<div class="form-group">
+<label for="unouno">Titulo de la pregunta (asunto)</label>
+<input id="unouno" type="text" class="form-control" placeholder="Buenos dias" name="titulo">
+</div>
+<div class="form-group">
+<label for="dosdos">Pregunta</label>
+<textarea id="dosdos" class="form-control" name="textarea"></textarea>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-md-6">
+<label>Tecnologia ?</label>
+<select name="lenguaje" class="form-control">
+{% for lenguaje in sqlconsu2 %}
+<option>{{lenguaje.lenguaje}}</option>
+{% endfor %}
+</select>
+
+</div>
+<div class="col-md-6">
+<label>En que idioma esta la pregunta</label>
+<select name="idiomamaterno" class="form-control">
+{% for habla in sqlconsu3 %}
+<option>{{habla.idioma}}</option>
+{% endfor %}
+</select>
+
+</div>
+</div>
+</div>
+<button type="submit" class="btn btn-success">Cargar pregunta</button>
+</form>
+</div>
+<div class="col-md-1"></div>
+</div>
+</div>
+{% endif %}
+
+
+    
+{% for datospreguntas in sqlconsu1 %}
+<div class="container-fluid espaciado">
+<div class="row prueba">
+        {% for datosusuario in sqlconsu4 %}
+<div class="col-md-1 elimi-padi"><img class="img-responsive" src="{{MEDIA_URL}}/media/{{datosusuario.foto}}" alt="Smiley face"></div>
+    {% endfor %}
+<div class="col-md-11">
+<hr>
+<p class="centrar">Username:  {{datospreguntas.usuariopregunta}} &nbsp;&nbsp;&nbsp; || &nbsp;&nbsp;&nbsp; Tecnologia: {{datospreguntas.preguntalenguaje}} &nbsp;&nbsp;&nbsp; || &nbsp;&nbsp;&nbsp; Fecha: {{datospreguntas.fecha}}
+</p>
+<hr>                
+<p class="text-justify">{{datospreguntas.pregunta_titulo}}</p>
+<hr>
+<p class="text-justify">
+
+
+    {% for kk in datospreguntas.contenido %}
+
+    {% if kk.que_es == 'texto' %}</p>
+    <p>{{kk.contenido}}</p>
+    {% endif %}
+
+    {% if kk.que_es == 'codigo' %}</p>
+    <pre class="prettyprint">{{kk.contenido}}</pre>
+    {% endif %}
+
+    {% endfor %}
+
+
+
+
+
+    </p>
+<hr>
+<a></a>
+<a href="{% url 'pregu:pregupregu' datospreguntas.preguntaid %}"><button type="button" class="btn btn-primary">Ir a respuestas</button>
+</a>                      
+<br />
+    <br />
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if ver_numerador == True %}
+    <div class="container-fluid espaciado">
+<div class="row prueba">
+
+<div class="col-md-5 elimi-padi"></div>
+<div class="col-md-7"><nav>
+  <ul class="pagination">
+
+    <li>{% if pag.pag != 1 %}<a href="{% url 'perfil:preguntasprivadaspagina' idusuario.idusuario pag0.pag0 %}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>{% endif %}</li>
+    <li><a href="#">{{pag.pag}}</a></li>
+    <li>{% if pag2.pag2 != pag.pag %}<a href="{% url 'perfil:preguntasprivadaspagina' idusuario.idusuario pag2.pag2 %}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>{% endif %}</li>
+
+  </ul>
+</nav>
+</div>
+
+</div>
+</div>
+    {% endif %}
+
+
+{% if hay_preguntas == False %}
+<div class="alert alert-danger" role="alert">
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<span class="sr-only">Error:</span>
+El usuario no a hecho preguntas.
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+            
+                    
+                    
+
+
+
+
+
+
+
+
+</div>
+<div class="col-md-4">
+<div class="container-fluid">
+<div class="row prueba">
+
+<div class="col-md-4 elimi-padi">
+
+
+      {% for datosusuario in sqlconsu4 %}
+<img class="img-responsive" src="{{MEDIA_URL}}/media/{{datosusuario.foto}}" alt="Smiley face"></div>
+<div class="col-md-8">
+<p>Nombre: {{datosusuario.nombre}}</p>
+<p>Apellido: {{datosusuario.apellido}}</p>
+<p>Username: {{datosusuario.username}}</p>
+<p>Nacionalidad: </p>
+</div>
+{% endfor %}
+
+
+
+
+
+</div>
+<br />
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-3"><img src="holder.js/50x50/sky"></div>
+<div class="col-md-6"><p style="margin-top:15px;">TRAYECTORIA</p></div>
+</div>
+
+
+<div class="row prueba">
+    <hr>
+<div class="col-md-5"></div>
+<div class="col-md-7">
+<p><a href="{% url 'perfil:preguntasprivadas' idusuario.idusuario %}">Preguntas [n]</a></p>
+<p><a href="{% url 'perfil:respuestasprivadas' idusuario.idusuario %}">Respuestas [n]</a></p>
+</div>
+</div>
+<br />
+
+
+
+{% if var == True %}
+<div class="row prueba">
+<div class="col-md-1"></div>
+<div class="col-md-3"><img src="holder.js/50x50/sky"></div>
+<div class="col-md-6"><p style="margin-top:15px;">GRUPOS</p></div>
+</div>
+
+
+<div class="row prueba">
+<hr>
+<div class="col-md-5"><p>Nombre del grupo</p></div>
+<div class="col-md-5"><p>Privacidad</p></div>
+<div class="col-md-2"><p></p></div>
+</div>
+
+
+<div class="row prueba">
+<form action="{% url 'grup:creargrupo' %}" method="post">{% csrf_token %}
+<div class="col-md-5"><input class="form-control" name="nombregrupo"></div>
+<div class="col-md-5"><select name="estado" class="form-control"><option>publico</option><option>privado</option></select></div>
+<div class="col-md-2"><button type="submit" class="btn btn-warning">OK</button></div>
+</form>
+<br />
+<br />
+</div>
+
+
+
+<div class="row prueba">
+<hr>
+<div class="col-md-5"></div>
+<div class="col-md-7">{% for hhh in grupo %}<p><a href="{% url 'grup:vista_grupo' hhh.grupo %}">{{hhh.grupo}}</a></p>{% endfor %}</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/holder.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+</body>
+</html>
